@@ -1,10 +1,11 @@
-import { useEffect, useState } from "react";
+// import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Button } from "react-bootstrap";
 
 import { Board } from "../Board/Board";
 import { getNextPlayer, getWinner } from "../../domain/game";
 import { MAX_MOVES, PLAYER_X } from "../../constants/game";
-import { socket } from "../../services/socket";
+// import { socket } from "../../services/socket";
 import { Winner } from "../Winner/Winner";
 
 import "./Game.css";
