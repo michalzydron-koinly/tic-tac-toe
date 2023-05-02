@@ -3,18 +3,8 @@ import Table from "react-bootstrap/Table";
 import { Square } from "../Square/Square";
 
 import "./Board.css";
-export const Board = ({ currentPlayer, onSquareClick, squareValues }) => {
-  const handleSquareClick = (index) => {
-    if (squareValues[index]) {
-      return;
-    }
 
-    const nextSquareValues = squareValues.slice();
-    nextSquareValues[index] = currentPlayer;
-
-    onSquareClick(nextSquareValues);
-  };
-
+export const Board = ({ onSquareClick, squareValues }) => {
   return (
     <Table className="table-bordered align-middle text-center Board">
       <tbody>
@@ -24,20 +14,22 @@ export const Board = ({ currentPlayer, onSquareClick, squareValues }) => {
               // TODO: The key should be more unique
               <tr key={index}>
                 <Square
-                  onClick={() => handleSquareClick(index)}
+                  onClick={() => onSquareClick(index)}
                   value={squareValues[index]}
                 />
                 <Square
-                  onClick={() => handleSquareClick(index + 1)}
+                  onClick={() => onSquareClick(index + 1)}
                   value={squareValues[index + 1]}
                 />
                 <Square
-                  onClick={() => handleSquareClick(index + 2)}
+                  onClick={() => onSquareClick(index + 2)}
                   value={squareValues[index + 2]}
                 />
               </tr>
             );
           }
+
+          return null;
         })}
       </tbody>
     </Table>
