@@ -1,13 +1,13 @@
-import Alert from "react-bootstrap/Alert";
-
 import "bootstrap/dist/css/bootstrap.min.css";
+
+import { Game } from "./components/Game/Game";
 
 import "./App.css";
 
 function App() {
   return (
     <div className="App">
-      <Alert variant="success">tic-tac-toe</Alert>
+      <Game />
     </div>
   );
 }
