@@ -1,9 +1,10 @@
-import { Fragment, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { Button } from "react-bootstrap";
 
 import { Board } from "../Board/Board";
 import { getNextPlayer, getWinner } from "../../domain/game";
 import { PLAYER_X } from "../../constants/game";
+import { socket } from "../../services/socket";
 import { Winner } from "../Winner/Winner";
 
 import "./Game.css";
@@ -16,6 +17,21 @@ export const Game = () => {
 
   const winner = getWinner(squareValues);
 
+  // useEffect(() => {
+  //   socket.connect("ws://localhost:1234");
+  //
+  //   socket.on("square values", (nextSquareValues) => {
+  //     setSquareValues(nextSquareValues);
+  //   });
+  //   socket.on("current player", (nextCurrentPlayer) => {
+  //     setCurrentPlayer(nextCurrentPlayer);
+  //   });
+  //
+  //   return () => {
+  //     socket.disconnect();
+  //   };
+  // }, []);
+
   const handleSquareClick = (index) => {
     if (winner || squareValues[index]) {
       return;
@@ -25,12 +41,16 @@ export const Game = () => {
     nextSquareValues[index] = currentPlayer;
     setSquareValues(nextSquareValues);
 
+    // socket.emit('square values', squareValues);
+
     const nextPlayer = getNextPlayer(currentPlayer);
     setCurrentPlayer(nextPlayer);
   };
 
-  const handleResetButtonClick = () => {
+  const handleStartNewGameButtonClick = () => {
     setSquareValues(defaultSquareValues);
+
+    // socket.emit('new-game');
   };
 
   return (
@@ -43,7 +63,7 @@ export const Game = () => {
       {winner ? (
         <Fragment>
           <Winner player={winner} />
-          <Button onClick={handleResetButtonClick}>Reset game</Button>
+          <Button onClick={handleStartNewGameButtonClick}>Start new game</Button>
         </Fragment>
       ) : (
         <p>Current player: {currentPlayer}</p>
