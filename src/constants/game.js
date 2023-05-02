@@ -1,6 +1,8 @@
 export const PLAYER_X = "X";
 export const PLAYER_O = "O";
 
+export const MAX_MOVES = 8;
+
 export const WINNING_SEQUENCES = [
   [0, 1, 2],
   [3, 4, 5],
